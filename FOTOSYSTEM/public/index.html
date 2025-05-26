@@ -1,0 +1,132 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunshine Cowhides Gallery</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/gallery.css">
+  <link rel="stylesheet" href="/css/cart.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Tela de Login -->
+    <div id="login-screen" class="screen active">
+      <div class="login-container">
+        <h1>Sunshine Cowhides</h1>
+        <div class="logo">
+          <!-- Logo aqui -->
+        </div>
+        <div class="login-form">
+          <h2>Acesso de Cliente</h2>
+          <div class="input-group">
+            <label for="customer-code">Código de Acesso</label>
+            <input type="text" id="customer-code" maxlength="4" placeholder="Digite seu código">
+          </div>
+          <button id="login-btn" class="btn btn-primary">Entrar</button>
+          
+          <div class="admin-link">
+            <a href="/admin">Acesso Administrativo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tela Principal (Galeria) -->
+    <div id="gallery-screen" class="screen">
+      <header>
+        <div class="logo-small">Sunshine Cowhides</div>
+        <div class="user-info">
+          <span id="user-name"></span>
+          <button id="logout-btn" class="btn btn-small">Sair</button>
+        </div>
+      </header>
+
+      <div class="gallery-container">
+        <!-- Sidebar com Categorias -->
+        <aside class="sidebar">
+          <h2>Categorias</h2>
+          <div id="categories-list" class="categories-list">
+            <!-- Categorias serão inseridas aqui -->
+            <div class="loading">Carregando categorias...</div>
+          </div>
+        </aside>
+
+        <!-- Conteúdo Principal (Imagens) -->
+        <main class="gallery-content">
+          <div class="gallery-header">
+            <h2 id="current-category">Selecione uma categoria</h2>
+            <div class="gallery-actions">
+              <button id="select-all-btn" class="btn btn-small">Selecionar Todos</button>
+              <button id="view-cart-btn" class="btn btn-primary">
+                Ver Carrinho <span id="cart-count" class="badge">0</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="images-container" class="images-container">
+            <!-- Imagens serão inseridas aqui -->
+            <div class="select-category-message">
+              Selecione uma categoria para ver as imagens
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <!-- Lightbox para visualização ampliada -->
+      <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+          <button class="close-btn">&times;</button>
+          <img id="lightbox-image" src="" alt="">
+          <div class="lightbox-actions">
+            <button id="prev-btn" class="nav-btn">&lt;</button>
+            <button id="add-to-cart-btn" class="btn btn-primary">Adicionar ao Carrinho</button>
+            <button id="next-btn" class="nav-btn">&gt;</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carrinho de Compras -->
+      <div id="cart-modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Seu Carrinho</h2>
+            <button class="close-btn">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div id="cart-items" class="cart-items">
+              <!-- Itens do carrinho serão inseridos aqui -->
+              <div class="empty-cart-message">
+                Seu carrinho está vazio
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="cart-summary">
+              <div class="total">
+                Total: <span id="cart-total">R$ 0,00</span>
+              </div>
+            </div>
+            <div class="cart-actions">
+              <button id="clear-cart-btn" class="btn btn-secondary">Limpar Carrinho</button>
+              <button id="checkout-btn" class="btn btn-primary">Finalizar Pedido</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/utils.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/gallery/sidebar.js"></script>
+  <script src="/js/gallery/browser.js"></script>
+  <script src="/js/gallery/lightbox.js"></script>
+  <script src="/js/cart/cart.js"></script>
+  <script src="/js/cart/checkout.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
