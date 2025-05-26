@@ -87,9 +87,14 @@ const api = {
       return api.request(`/gallery/images/${encodeURIComponent(categoryPath)}`);
     },
 
-    // Sincronizar categorias (admin)
-    async syncCategories() {
-      return api.request('/gallery/sync', 'POST');
+    // Obter todas as categorias do cliente
+    async getAllClientCategories() {
+      return api.request('/gallery/all-categories');
+    },
+
+    // Pesquisar categorias
+    async searchCategories(query) {
+      return api.request(`/gallery/search?query=${encodeURIComponent(query)}`);
     }
   },
 
@@ -103,6 +108,106 @@ const api = {
     // Obter pedidos
     async getOrders(status = 'waiting') {
       return api.request(`/orders?status=${status}`);
+    },
+
+    // Obter detalhes de um pedido
+    async getOrder(orderId) {
+      return api.request(`/orders/${orderId}`);
+    },
+
+    // Obter meus pedidos (cliente)
+    async getMyOrders(status) {
+      let url = '/orders/my-orders';
+      if (status) {
+        url += `?status=${status}`;
+      }
+      return api.request(url);
+    }
+  },
+
+  // Métodos de administração
+  admin: {
+    // Gerenciamento de clientes
+    async getCustomers() {
+      return api.request('/admin/customers');
+    },
+
+    async getCustomer(code) {
+      return api.request(`/admin/customers/${code}`);
+    },
+
+    async createCustomer(customerData) {
+      return api.request('/admin/customers', 'POST', customerData);
+    },
+
+    async updateCustomer(code, customerData) {
+      return api.request(`/admin/customers/${code}`, 'PUT', customerData);
+    },
+
+    async deleteCustomer(code) {
+      return api.request(`/admin/customers/${code}`, 'DELETE');
+    },
+
+    // Gerenciamento de categorias
+    async getCategories(parentPath = '') {
+      return api.request(`/admin/categories?parentPath=${encodeURIComponent(parentPath)}`);
+    },
+
+    async updateCategoryPrice(categoryId, priceData) {
+      return api.request(`/admin/categories/${categoryId}/price`, 'PUT', priceData);
+    },
+
+    async batchUpdatePrices(updates) {
+      return api.request('/admin/categories/batch-update', 'POST', { updates });
+    },
+
+    async syncCategories() {
+      return api.request('/admin/categories/sync', 'POST');
+    },
+
+    // Controle de acesso às categorias
+    async getCustomerCategoryAccess(code) {
+      return api.request(`/admin/customers/${code}/category-access`);
+    },
+
+    async grantCategoryAccess(code, categoryId, customPrice = null) {
+      return api.request(`/admin/customers/${code}/category-access`, 'POST', {
+        categoryId,
+        customPrice
+      });
+    },
+
+    async revokeCategoryAccess(code, categoryId) {
+      return api.request(`/admin/customers/${code}/category-access/${categoryId}`, 'DELETE');
+    },
+
+    async batchCategoryAccess(code, categories) {
+      return api.request(`/admin/customers/${code}/category-access/batch`, 'POST', {
+        categories
+      });
+    },
+
+    // Gerenciamento de pedidos
+    async getOrders(status) {
+      let url = '/admin/orders';
+      if (status) {
+        url += `?status=${status}`;
+      }
+      return api.request(url);
+    },
+
+    async getOrderDetails(orderId) {
+      return api.request(`/admin/orders/${orderId}`);
+    },
+
+    async updateOrderStatus(orderId, status) {
+      return api.request(`/admin/orders/${orderId}/status`, 'PUT', { status });
+    },
+
+    async processOrder(orderId, internalNotes) {
+      return api.request(`/admin/orders/${orderId}/process`, 'POST', {
+        internalNotes
+      });
     }
   }
 };
