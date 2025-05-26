@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sunshine Cowhides Admin</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Tela de Login -->
+    <div id="login-screen" class="screen active">
+      <div class="login-container">
+        <h1>Sunshine Cowhides</h1>
+        <div class="logo">
+          <!-- Logo aqui -->
+        </div>
+        <div class="login-form">
+          <h2>Acesso Administrativo</h2>
+          <div class="input-group">
+            <label for="admin-email">Email</label>
+            <input type="email" id="admin-email" placeholder="Digite seu email">
+          </div>
+          <div class="input-group">
+            <label for="admin-password">Senha</label>
+            <input type="password" id="admin-password" placeholder="Digite sua senha">
+          </div>
+          <button id="admin-login-btn" class="btn btn-primary">Entrar</button>
+          
+          <div class="client-link">
+            <a href="/">Acesso de Cliente</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Painel Administrativo -->
+    <div id="admin-screen" class="screen">
+      <header>
+        <div class="logo-small">Sunshine Cowhides</div>
+        <div class="user-info">
+          <span id="admin-name"></span>
+          <button id="admin-logout-btn" class="btn btn-small">Sair</button>
+        </div>
+      </header>
+
+      <div class="admin-container">
+        <!-- Sidebar de Navegação -->
+        <aside class="sidebar">
+          <h2>Menu</h2>
+          <ul class="nav-menu">
+            <li class="nav-item active" data-tab="dashboard">Dashboard</li>
+            <li class="nav-item" data-tab="customers">Clientes</li>
+            <li class="nav-item" data-tab="categories">Categorias</li>
+            <li class="nav-item" data-tab="orders">Pedidos</li>
+            <li class="nav-item" data-tab="settings">Configurações</li>
+          </ul>
+        </aside>
+
+        <!-- Conteúdo Principal -->
+        <main class="admin-content">
+          <!-- Abas do painel admin -->
+          <div id="dashboard-tab" class="tab-content active">
+            <h2>Dashboard</h2>
+            <div class="dashboard-cards">
+              <!-- Cards com estatísticas serão inseridos aqui -->
+            </div>
+          </div>
+
+          <div id="customers-tab" class="tab-content">
+            <h2>Gerenciar Clientes</h2>
+            <div id="customers-list">
+              <!-- Lista de clientes será inserida aqui -->
+            </div>
+          </div>
+
+          <div id="categories-tab" class="tab-content">
+            <h2>Gerenciar Categorias</h2>
+            <div id="categories-list">
+              <!-- Lista de categorias será inserida aqui -->
+            </div>
+          </div>
+
+          <div id="orders-tab" class="tab-content">
+            <h2>Gerenciar Pedidos</h2>
+            <div id="orders-list">
+              <!-- Lista de pedidos será inserida aqui -->
+            </div>
+          </div>
+
+          <div id="settings-tab" class="tab-content">
+            <h2>Configurações</h2>
+            <!-- Formulários de configuração serão inseridos aqui -->
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/utils.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/admin/dashboard.js"></script>
+  <script src="/js/admin/customers.js"></script>
+  <script src="/js/admin/categories.js"></script>
+</body>
+</html>
