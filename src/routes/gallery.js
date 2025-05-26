@@ -2,10 +2,11 @@
 const express = require('express');
 const { 
   getCategories, 
-  getImages, 
-  syncCategories 
+  getImages,
+  getAllClientCategories,
+  searchCategories
 } = require('../controllers/galleryController');
-const { adminOnly } = require('../middleware/auth');
+const { authMiddleware, adminOnly } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -15,7 +16,13 @@ router.get('/categories', getCategories);
 // Rota para listar imagens de uma categoria
 router.get('/images/:categoryPath(*)', getImages);
 
-// Rota para sincronizar categorias (admin)
-router.post('/sync', adminOnly, syncCategories);
+// Rota para obter todas as categorias do cliente
+router.get('/all-categories', getAllClientCategories);
+
+// Rota para pesquisar categorias
+router.get('/search', searchCategories);
+
+// Removendo a linha problemática por enquanto
+// router.post('/sync', adminOnly, syncCategories);
 
 module.exports = router;
